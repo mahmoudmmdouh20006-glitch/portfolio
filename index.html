@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MY TO DO LIST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      height: 100vh;
+      display: flex;
+      justify-content: center;  
+      align-items: center;      
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border: 4px solid #333;   
+      border-radius: 10px;
+      width: 300px;             
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      padding: 5px;
+      width: 70%;
+    }
+    button {
+      padding: 6px;
+      margin-left: 5px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+    li {
+      margin: 5px 0;
+      padding: 8px;
+      border: 2px solid #333;   
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;              
+      box-sizing: border-box;   
+    }
+    li.done {
+      text-decoration: line-through;
+      color: gray;
+    }
+    .remove {
+      color: red;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>My To-Do List</h2>
+    <input id="taskInput" type="text" placeholder="Enter a task">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    let taskList = document.getElementById("taskList");
+    
+    function addTask() {
+      let input = document.getElementById("taskInput");
+
+      if (input.value === "") return; 
+
+      let li = document.createElement("li");
+      li.textContent = input.value;
+
+      
+      let removeBtn = document.createElement("span");
+      removeBtn.textContent = "❌";
+      removeBtn.className = "remove";
+      removeBtn.onclick = function() {
+        li.remove(); 
+      };
+
+     
+      li.onclick = function(e) {
+        if (e.target !== removeBtn) { 
+          li.classList.toggle("done");
+        }
+      };
+
+      li.appendChild(removeBtn);
+      taskList.appendChild(li);
+
+      input.value = ""; 
+    }
+  </script>
+</body>
+</html>
